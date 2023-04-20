@@ -1,0 +1,48 @@
+pruning_modifiers:
+  - !OBSnmvPruningModifier
+    params: [
+      "re:bert.encoder.layer.*.attention.self.query.weight",
+      "re:bert.encoder.layer.*.attention.self.key.weight",
+      "re:bert.encoder.layer.*.attention.self.value.weight",
+      "re:bert.encoder.layer.*.attention.output.dense.weight",
+      "re:bert.encoder.layer.*.intermediate.dense.weight",
+      "re:bert.encoder.layer.*.output.dense.weight",
+    ]
+    init_sparsity: 0.75
+    final_sparsity: 0.75
+    start_epoch: 0
+    end_epoch: 1
+    update_frequency: 1.0
+    inter_func: cubic
+    global_sparsity: False
+    mask_type: unstructured
+    num_grads: 1024
+    damp: 1e-7
+    fisher_block_size: 8
+    grad_sampler_kwargs:
+      batch_size: 16
+
+#pruning_modifiers:
+#  - !OBSnmvPruningModifier
+#    params: [
+#      "re:bert.encoder.layer.*.attention.self.query.weight",
+#      "re:bert.encoder.layer.*.attention.self.key.weight",
+#      "re:bert.encoder.layer.*.attention.self.value.weight",
+#      "re:bert.encoder.layer.*.attention.output.dense.weight",
+#      "re:bert.encoder.layer.*.intermediate.dense.weight",
+#      "re:bert.encoder.layer.*.output.dense.weight",
+#    ]
+#    init_sparsity: 0.875
+#    final_sparsity: 0.875
+#    start_epoch: 0
+#    end_epoch: 1
+#    update_frequency: 1.0
+#    inter_func: cubic
+#    global_sparsity: False
+#    mask_type: unstructured
+#    #num_grads: 1024
+#    num_grads: 1
+#    damp: 1e-7
+#    fisher_block_size: 16
+#    grad_sampler_kwargs:
+#      batch_size: 8
